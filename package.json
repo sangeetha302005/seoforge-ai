@@ -1,0 +1,30 @@
+{
+  "name": "seoforge-ai",
+  "version": "1.0.0",
+  "description": "SEOForge AI - AI SEO Blog & Content Cluster Generator",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "server": "node server/index.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"magenta,cyan\" \"npm run server\" \"npm run client\"",
+    "build": "npm run build --prefix client",
+    "test": "node test-workflow.js"
+  },
+  "keywords": [
+    "seo",
+    "content-cluster",
+    "blog-generator",
+    "search-intent",
+    "prompt-engineering"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
