@@ -4,17 +4,17 @@
 > **Product Category:** AI-powered SEO content planning, topic cluster architecture, and blog generation workstation.
 
 [![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://seoforge-ai-one.vercel.app/)
-[![Streamlit Cloud](https://img.shields.io/badge/Deploy-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit)](https://seoforge-ai-302005.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 ---
 
-## 🌐 Live Deployments
+## 🌐 Live Web Application
 
-| Platform | Live URL | Tech Stack | Description |
-| :--- | :--- | :--- | :--- |
-| **Vercel** *(Primary)* | **[seoforge-ai-one.vercel.app](https://seoforge-ai-one.vercel.app/)** | **React 18 + TypeScript + Tailwind CSS** | Full-featured SaaS web app: interactive visual cluster canvas, in-browser markdown editor, local SEO assistant, and persistent project management. |
-| **Streamlit Cloud** | **[seoforge-ai-302005.streamlit.app](https://seoforge-ai-302005.streamlit.app/)** | **Python (Streamlit 1.65)** | Lightweight, instant-generation data dashboard powered by the Multi-Variable Synthesis Engine. |
+**Official Production URL:** 👉 **[https://seoforge-ai-one.vercel.app/](https://seoforge-ai-one.vercel.app/)**
+
+- **Tech Stack:** React 18 + TypeScript + Vite + Tailwind CSS
+- **Capabilities:** Interactive visual cluster canvas, in-browser markdown editor, local SEO assistant, and persistent browser-based project management.
+- **Generation:** Dual-Engine setup with Google Gemini AI + Built-in Multi-Variable Synthesis Fallback.
 
 ---
 
@@ -117,22 +117,13 @@ Rule-based auditing engine checking:
 
 ---
 
-## 5. Deployment Guide
+## 5. Deployment Guide (Vercel)
 
-### Deploying the React App to Vercel (Recommended)
-The repository includes a ready-to-use `vercel.json` configuration:
-1. Fork or push this repository to your GitHub account.
-2. Go to **[vercel.com/new](https://vercel.com/new)** and import your repository (`seoforge-ai`).
+The repository includes a production-ready `vercel.json` configuration for 1-click deployment:
+1. Push or fork this repository to your GitHub account.
+2. Open **[vercel.com/new](https://vercel.com/new)** and import your repository (`seoforge-ai`).
 3. Leave the default settings (Root directory: `./`, Framework: Vite).
-4. Click **Deploy**. Vercel will install dependencies, build the client, and serve the application globally with 100% feature parity.
-
-### Deploying the Streamlit App to Streamlit Cloud
-1. Go to **[share.streamlit.io](https://share.streamlit.io)** and log in with GitHub.
-2. Click **"New app"** and select:
-   - **Repository:** `your-username/seoforge-ai`
-   - **Branch:** `main`
-   - **Main file path:** `app.py`
-3. Click **Deploy!** Streamlit Cloud will install from `requirements.txt` and launch the app in ~60 seconds.
+4. Click **Deploy**. Vercel will install dependencies, build the React client, and serve the application globally with 100% feature parity.
 
 ---
 
@@ -140,7 +131,6 @@ The repository includes a ready-to-use `vercel.json` configuration:
 
 ### Prerequisites
 - Node.js version 18.0 or higher (v20.x tested and verified)
-- Python 3.10+ (if running the Streamlit app locally)
 - npm version 9.0 or higher
 
 ### Development Setup (Hot Reloading)
@@ -163,15 +153,6 @@ npm run dev
 
 - Client runs at: **`http://localhost:5173`**
 - Server runs at: **`http://localhost:5000`**
-
-### Running Streamlit Locally
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-- Streamlit runs at: **`http://localhost:8501`**
 
 ### Running the Automated Test Suite
 
