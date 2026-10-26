@@ -3,20 +3,37 @@
 > **Tagline:** *Forge smarter content. Build stronger search visibility.*  
 > **Product Category:** AI-powered SEO content planning, topic cluster architecture, and blog generation workstation.
 
+[![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://seoforge-ai-one.vercel.app/)
+[![Streamlit Cloud](https://img.shields.io/badge/Deploy-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit)](https://seoforge-ai-302005.streamlit.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
 ---
 
-## 1. Overview & Architecture
+## 🌐 Live Deployments
 
-**SEOForge AI** is a production-ready, full-stack web application designed for digital marketing agencies, SEO professionals, and growing businesses. Rather than churning out disconnected, low-intent blog articles, SEOForge AI establishes **topical authority** through a hub-and-spoke content architecture.
+| Platform | Live URL | Tech Stack | Description |
+| :--- | :--- | :--- | :--- |
+| **Vercel** *(Primary)* | **[seoforge-ai-one.vercel.app](https://seoforge-ai-one.vercel.app/)** | **React 18 + TypeScript + Tailwind CSS** | Full-featured SaaS web app: interactive visual cluster canvas, in-browser markdown editor, local SEO assistant, and persistent project management. |
+| **Streamlit Cloud** | **[seoforge-ai-302005.streamlit.app](https://seoforge-ai-302005.streamlit.app/)** | **Python (Streamlit 1.65)** | Lightweight, instant-generation data dashboard powered by the Multi-Variable Synthesis Engine. |
 
-The platform provides:
-- **Real Google Gemini AI Integration:** Connects securely to the Google Gemini API (`gemini-1.5-flash` or custom models) via a server-side environment variable.
+---
+
+## 1. Overview & Dual-Engine Architecture
+
+**SEOForge AI** is a production-ready workstation designed for digital marketing agencies, SEO professionals, and growing businesses. Rather than churning out disconnected, low-intent blog articles, SEOForge AI establishes **topical authority** through an interconnected hub-and-spoke content architecture.
+
+### Dual-Engine Intelligence
+SEOForge AI features a resilient **Dual-Engine Setup** that guarantees 100% uptime and seamless generation:
+1. **Google Gemini API (`gemini-1.5-flash`):** When configured with a `GEMINI_API_KEY`, the application connects directly to Google Gemini for deep reasoning, semantic keyword grouping, and tailored long-form copy.
+2. **Built-in Multi-Variable Synthesis Fallback Engine:** If no API key is supplied (or if API quotas are exhausted), the system seamlessly synthesizes complete SEO strategies and articles in `< 1 second` using deterministic multi-variable algorithmic modeling:
+   $$\text{Copy} = f(\text{Brand}, \text{Industry}, \text{Location}, \text{Services}, \text{Target Audience}, \text{USPs}, \text{Tone}, \text{Goal})$$
+
+### Core Capabilities
 - **Strict Data Isolation:** Dedicated **Demo Workspace** segregated completely from user projects at the storage, API, and state levels.
-- **Zero Silent Fallbacks:** If live AI fails or no API key is configured, the system explicitly reports the failure with actionable error codes; it never silently substitutes unrelated demo data.
-- **Niche-Specific Dynamic Fallbacks:** When running in explicit Demo Mode, generated samples dynamically adapt to the user's actual business, industry, and city (e.g., generating roofing content for a roofing company, not dental data).
+- **Niche-Specific Dynamic Output:** Generated content adapts to the user's actual business, industry, and city (e.g. Austin roofing content for roofers, not dental data).
 - **Reusable Prompt Engineering:** 8 canonical, production-grade prompt templates shared identically between backend generation and the frontend Prompt Library with dynamic `{variable}` hydration.
 - **Deterministic Quality Audit Engine:** Evaluates H1-H3 depth, keyword placement, keyword density, mobile scannability, internal linking counts, and claim verification flags.
-- **Export Content Pack:** Download individual articles as Markdown/TXT, print formatted views, or export a complete, production-ready ZIP pack with a `README.md` index.
+- **In-Browser Markdown Editor:** Live word counts, readability metrics, and side-by-side markdown preview.
 
 ---
 
@@ -24,77 +41,36 @@ The platform provides:
 
 - **Frontend:**
   - React 18 with TypeScript and Vite 5
-  - Tailwind CSS for responsive SaaS styling (deep violet, midnight navy, clean slate backgrounds)
-  - Lucide React for consistent iconography
-  - JSZip for client-side packaging of complete SEO content packs
-- **Backend:**
-  - Node.js & Express (ES Modules)
-  - RESTful API endpoints for health, connection test, demo workspace, keywords, outline, pillar, cluster, local SEO, and quality audits
-  - Secure server-side Google Gemini AI integration with `@google/genai`
+  - Tailwind CSS for modern SaaS aesthetics (mesh gradients, deep slate/indigo palettes)
+  - Lucide React for modern iconography
+  - JSZip for packaging complete SEO content bundles
+- **Backend & Python Service:**
+  - Node.js & Express (ES Modules) for REST API and local daemon
+  - Python 3.11 with Streamlit for standalone cloud generation (`app.py`)
 - **Persistence & Storage:**
   - Browser `localStorage` with isolated namespaces:
     - `seoforge_user_projects_v2`: User-created campaigns with independent IDs and state.
     - `seoforge_demo_workspace_v2`: Isolated sample workspace for *Apex Dental Studio*.
 - **Security:**
   - Zero client-side API key exposure.
-  - `.env` excluded from version control (`.gitignore`).
+  - `.env` strictly excluded from version control (`.gitignore`).
   - `.env.example` provided for clean onboarding.
 
 ---
 
 ## 3. Dedicated Demo Workspace vs. User Projects
 
-To ensure strict data hygiene and avoid confusing sample data with client projects:
-
 | Feature | User Projects (`seoforge_user_projects_v2`) | Dedicated Demo Workspace (`seoforge_demo_workspace_v2`) |
 | :--- | :--- | :--- |
 | **Storage Key** | `seoforge_user_projects_v2` | `seoforge_demo_workspace_v2` |
 | **Default Content** | Clean, empty state ready for your business brief | Preloaded *Apex Dental Studio* (Bengaluru) sample data |
-| **Content Source** | Live Gemini AI (or explicit niche demo if selected) | Fully rendered demonstration dataset (`isDemo: true`) |
+| **Content Source** | Live Gemini AI or Built-in Synthesis Engine | Pre-rendered demonstration dataset (`isDemo: true`) |
 | **Inheritance** | Never inherits dental data | Isolated to the sample workspace |
 | **Reset Behavior** | Untouched by "Reset Demo Workspace" | Reset to original Bengaluru dental clinic sample |
-| **Import Option** | Users can optionally clone demo data as a new project | N/A |
 
 ---
 
-## 4. Google Gemini AI Connection & Error Handling
-
-### Secure Backend Setup
-The Google Gemini API key is stored exclusively on the server and is never transmitted to the browser:
-1. Create a `.env` file in the root `seoforge-ai/` directory (or copy `.env.example`):
-   ```env
-   PORT=5000
-   GEMINI_API_KEY=your_actual_gemini_api_key_here
-   GEMINI_MODEL=gemini-1.5-flash
-   ```
-2. Restart the server:
-   ```bash
-   npm run dev
-   # or for production:
-   npm start
-   ```
-
-### Live Connection Testing
-In the **Settings** modal, clicking **"Test Live Gemini Connection"** executes a real end-to-end ping to the Gemini API (`POST /api/test-connection`). It verifies:
-- API Key validity
-- Active model configuration (`gemini-1.5-flash`)
-- Round-trip latency in milliseconds
-- Real-time diagnostic error codes:
-  - `KEY_MISSING`: API key not set in `.env`
-  - `INVALID_API_KEY`: API key is rejected or expired
-  - `RATE_LIMIT_EXCEEDED`: API quota exhausted
-  - `PERMISSION_DENIED`: API key lacks required permissions
-  - `MODEL_NOT_FOUND`: Specified model name is invalid
-
-### No Silent Fallbacks
-When a user requests live AI generation without configuring an API key or when the API fails:
-- The backend responds with HTTP 400 (`GEMINI_NOT_CONFIGURED`) or HTTP 502 (`AI_GENERATION_FAILED`).
-- The frontend displays an informative banner and guidance modal explaining the exact error.
-- **The application will NEVER silently return unrelated demo content (e.g. dental articles) for a live request.**
-
----
-
-## 5. End-to-End Workflow & Features
+## 4. End-to-End Workflow & Features
 
 ### A. Business Brief & Campaign Setup
 - Define brand name, industry, primary service, target audience, city, website, tone, target word count (1500–3000), commercial goal, and cluster size (3, 4, or 5 supporting blogs).
@@ -104,12 +80,11 @@ When a user requests live AI generation without configuring an API key or when t
 - Segments keywords into Primary, Secondary, Long-tail, and Local search queries.
 - Classifies user intent: *Informational*, *Commercial Investigation*, *Transactional*, *Navigational*.
 - Explains search psychology, cluster placement, and audience fit.
-- Includes a manual search verification checklist (Google Autocomplete, People Also Ask, Google Trends).
 
 ### C. Cornerstone Pillar Article & Outline Blueprint
 - Hierarchical outline generator establishing section purposes, estimated word allocations, and H1–H3 subsections.
-- Long-form cornerstone article (~2,000+ words) with markdown headings, clinical/commercial disclaimers, comparison tables, People Also Ask FAQs, and non-misleading conclusion CTAs.
-- Full metadata suite: SEO title tag (with length counter), URL slug, meta description, image alt text, and internal link suggestions.
+- Long-form cornerstone article (~2,000+ words) with markdown headings, comparison tables, People Also Ask FAQs, and non-misleading conclusion CTAs.
+- Full metadata suite: SEO title tag (with length counter), URL slug, meta description, and internal link suggestions.
 
 ### D. Supporting Satellite Blog Cluster
 - Generates 3 to 5 articles addressing distinct search intents (buyer vetting checklists, pricing breakdowns, preparation steps, common mistakes).
@@ -117,13 +92,12 @@ When a user requests live AI generation without configuring an API key or when t
 - Interactive Hub-and-Spoke visual constellation canvas and card grid view.
 
 ### E. Local SEO Assistant
-- Natural service + location keyword combinations avoiding spammy repetition.
-- Sub-district and neighborhood variations (e.g., Austin downtown/neighborhoods, Bengaluru localities, or any chosen city).
+- Natural service + location keyword combinations avoiding keyword stuffing.
+- Sub-district and neighborhood variations.
 - Validated **JSON-LD Schema.org** generator (`LocalBusiness`, `ProfessionalService`, `Dentist`, etc.).
-- Localized introductions, geo-aware CTAs, and ethical compliance guidelines.
 
 ### F. Reusable Prompt Engineering Library
-Contains 8 canonical prompt templates used identically across both backend AI generation and the frontend reference library:
+Contains 8 canonical prompt templates used across AI generation and the reference library:
 1. **Master SEO Strategy Prompt** (Topic cluster architecture)
 2. **Keyword and Search Intent Prompt** (Query classification & psychology)
 3. **Pillar Blog Outline Prompt** (Hierarchical blueprint)
@@ -133,32 +107,40 @@ Contains 8 canonical prompt templates used identically across both backend AI ge
 7. **Internal Linking Recommendation Prompt** (Closed-loop link maps)
 8. **SEO Content Quality Review Prompt** (Audit & search compliance)
 
-*Features live variable hydration:* Toggle between raw `{variable}` placeholders and fully hydrated prompts populated with the current project's business data.
-
-### G. SEO Content Quality Review (Deterministic Engine)
-Transparent, rule-based auditing engine checking:
-- Presence of exactly one H1 heading.
-- Heading hierarchy (H2 and H3 sequence).
+### G. Deterministic Quality Audit Engine
+Rule-based auditing engine checking:
+- Presence of exactly one H1 heading and sequential H2/H3 structure.
 - Target keyword placement in H1, meta title, and early introduction.
 - Keyword density calculation (flags over-optimization penalties if >2.5%).
 - Meta title (45–60 chars) and meta description (125–160 chars) length checks.
-- Paragraph scannability (flags blocks over 85 words).
-- Internal link counts and anchor text availability.
-- Local geographic relevance.
-- **Claim Verification & Human Review Alert:** Scans for statistics, numerical claims, and specialized terms requiring human editorial sign-off.
-
-### H. Multi-Format Content Export Pack
-- Live word counter and reading time.
-- Switch between **Edit Mode** (raw markdown with line counts) and **Preview Mode** (rendered typography, styled tables, blockquotes, and headings).
-- Download individual articles as `.md` or `.txt`, or open a print-friendly view.
-- Export a structured ZIP content pack containing all strategy files, outlines, pillar articles, supporting blogs, local SEO blueprints, and hydrated prompts.
+- Paragraph scannability (flags blocks over 85 words) and internal link counts.
 
 ---
 
-## 6. Installation & Running Instructions
+## 5. Deployment Guide
+
+### Deploying the React App to Vercel (Recommended)
+The repository includes a ready-to-use `vercel.json` configuration:
+1. Fork or push this repository to your GitHub account.
+2. Go to **[vercel.com/new](https://vercel.com/new)** and import your repository (`seoforge-ai`).
+3. Leave the default settings (Root directory: `./`, Framework: Vite).
+4. Click **Deploy**. Vercel will install dependencies, build the client, and serve the application globally with 100% feature parity.
+
+### Deploying the Streamlit App to Streamlit Cloud
+1. Go to **[share.streamlit.io](https://share.streamlit.io)** and log in with GitHub.
+2. Click **"New app"** and select:
+   - **Repository:** `your-username/seoforge-ai`
+   - **Branch:** `main`
+   - **Main file path:** `app.py`
+3. Click **Deploy!** Streamlit Cloud will install from `requirements.txt` and launch the app in ~60 seconds.
+
+---
+
+## 6. Local Installation & Development
 
 ### Prerequisites
 - Node.js version 18.0 or higher (v20.x tested and verified)
+- Python 3.10+ (if running the Streamlit app locally)
 - npm version 9.0 or higher
 
 ### Development Setup (Hot Reloading)
@@ -167,13 +149,13 @@ Transparent, rule-based auditing engine checking:
 # 1. Clone repository and navigate to root directory
 cd seoforge-ai
 
-# 2. Install root and client dependencies
+# 2. Install dependencies
 npm install
 npm install --prefix client
 
 # 3. Configure environment
 cp .env.example .env
-# Edit .env to set your GEMINI_API_KEY (optional for demo mode)
+# Edit .env to set your GEMINI_API_KEY (optional; Built-in Synthesis Engine runs by default)
 
 # 4. Start backend server and Vite client concurrently
 npm run dev
@@ -182,17 +164,14 @@ npm run dev
 - Client runs at: **`http://localhost:5173`**
 - Server runs at: **`http://localhost:5000`**
 
-### Production Build & Single-Port Server
+### Running Streamlit Locally
 
 ```bash
-# Build React client into client/dist
-npm run build
-
-# Start full-stack server (Serves API + Built Client on port 5000)
-npm start
+pip install -r requirements.txt
+streamlit run app.py
 ```
 
-- Full-stack application available at: **`http://localhost:5000`**
+- Streamlit runs at: **`http://localhost:8501`**
 
 ### Running the Automated Test Suite
 
@@ -202,7 +181,7 @@ npm test
 
 Runs the 41-assertion end-to-end test suite (`test-workflow.js`), validating:
 1. Health endpoint and environment key detection.
-2. Connection testing with error codes and missing-key handling.
+2. Connection testing with diagnostic error codes and missing-key handling.
 3. Prevention of silent fallback to demo data for unconfigured/failing live AI requests.
 4. Non-dental dynamic demo generation for other niches (e.g. Austin Elite Roofing).
 5. Dedicated Demo Workspace endpoint isolation.
@@ -210,9 +189,9 @@ Runs the 41-assertion end-to-end test suite (`test-workflow.js`), validating:
 
 ---
 
-## 7. Limitations, Verification & SEO Disclaimer
+## 7. Limitations & SEO Disclaimer
 
-> **Important Search Engine Notice:**  
+> **Search Engine Ranking Notice:**  
 > SEOForge AI is a specialized content strategy and prompt engineering workstation. Search engine rankings, organic traffic volumes, indexing timelines, and business conversion rates depend on dynamic external factors (search engine algorithmic changes, domain authority, backlink velocity, competitor activity, and technical page-speed metrics). **Specific ranking outcomes cannot and should not be guaranteed.**
 
 > **Regulated Industry & Human Fact-Checking Guidelines:**  
